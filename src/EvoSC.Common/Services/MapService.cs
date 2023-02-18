@@ -50,9 +50,11 @@ public class MapService : IMapService
 
         await SaveMapFileAsync(mapFile, filePath, fileName);
 
-        var author = await GetMapAuthorAsync(PlayerUtils.IsAccountId(mapMetadata.AuthorId)
+        var playerId = PlayerUtils.IsAccountId(mapMetadata.AuthorId)
             ? mapMetadata.AuthorId
-            : PlayerUtils.ConvertLoginToAccountId(mapMetadata.AuthorId));
+            : PlayerUtils.ConvertLoginToAccountId(mapMetadata.AuthorId);
+
+        var author = await GetMapAuthorAsync(playerId, mapMetadata.AuthorName);
 
         IMap map;
 
@@ -106,6 +108,47 @@ public class MapService : IMapService
         await _mapRepository.RemoveMapAsync(mapId);
     }
 
+    public async Task AddCurrentMapListAsync()
+    {
+        var serverMapList = await _serverClient.Remote.GetMapListAsync(-1, 0);
+
+        foreach (var serverMap in serverMapList)
+        {
+            try
+            {
+                IMap? existingMap = await GetMapByUidAsync(serverMap.UId);
+
+                if (existingMap != null)
+                {
+                    continue;
+                }
+
+                var authorAccountId = PlayerUtils.ConvertLoginToAccountId(serverMap.Author);
+                var author = await _playerService.GetOrCreatePlayerAsync(authorAccountId);
+
+                var mapMeta = new MapMetadata
+                {
+                    MapUid = serverMap.UId,
+                    MapName = serverMap.Name,
+                    AuthorId = serverMap.Author,
+                    AuthorName = serverMap.AuthorNickname,
+                    ExternalId = null,
+                    ExternalVersion = null,
+                    ExternalMapProvider = null
+                };
+
+                _logger.LogDebug("Adding map {Name} ({Uid}) to the database", serverMap.Name, serverMap.UId);
+                await _mapRepository.AddMapAsync(mapMeta, author, serverMap.FileName);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to add current map to the database: {Name} ({Uid})", 
+                    serverMap.Name,
+                    serverMap.UId);
+            }
+        }
+    }
+
     private static bool MapVersionExistsInDb(IMap map, MapMetadata mapMetadata)
     {
         return map.ExternalVersion == mapMetadata.ExternalVersion;
@@ -131,15 +174,41 @@ public class MapService : IMapService
         }
     }
 
-    private async Task<IPlayer> GetMapAuthorAsync(string authorId)
+    private async Task<IPlayer> GetMapAuthorAsync(string authorId, string? name)
     {
         var dbPlayer = await _playerService.GetPlayerAsync(authorId);
 
         if (dbPlayer == null)
         {
-            return await _playerService.CreatePlayerAsync(authorId);
+            return await _playerService.CreatePlayerAsync(authorId, name);
         }
 
         return dbPlayer;
+    }
+    
+    public async Task<IMap> GetOrAddCurrentMapAsync()
+    {
+        var currentMap = await _serverClient.Remote.GetCurrentMapInfoAsync();
+        var map = await GetMapByUidAsync(currentMap.UId);
+        
+        if (map == null)
+        {
+            var mapAuthor = await _playerService.GetOrCreatePlayerAsync(PlayerUtils.ConvertLoginToAccountId(currentMap.Author));
+
+            var mapMeta = new MapMetadata
+            {
+                MapUid = currentMap.UId,
+                MapName = currentMap.Name,
+                AuthorId = mapAuthor.AccountId,
+                AuthorName = mapAuthor.NickName,
+                ExternalId = currentMap.UId,
+                ExternalVersion = null,
+                ExternalMapProvider = null
+            };
+
+            map = await _mapRepository.AddMapAsync(mapMeta, mapAuthor, currentMap.FileName);
+        }
+
+        return map;
     }
 }

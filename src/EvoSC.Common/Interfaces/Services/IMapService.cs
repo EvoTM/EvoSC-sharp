@@ -42,4 +42,16 @@ public interface IMapService
     /// <param name="mapId">The maps ID in the database.</param>
     /// <returns></returns>
     public Task RemoveMapAsync(long mapId);
+
+    /// <summary>
+    /// Add all maps in the current map list to the database if they don't already exist.
+    /// </summary>
+    /// <returns></returns>
+    public Task AddCurrentMapListAsync();
+    
+    /// <summary>
+    /// Get the current map on the server.
+    /// </summary>
+    /// <returns></returns>
+    public Task<IMap> GetOrAddCurrentMapAsync();
 }
