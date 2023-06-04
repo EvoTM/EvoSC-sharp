@@ -21,13 +21,12 @@ public class PlayerRepository : DbRepository, IPlayerRepository
     {
         var player = new DbPlayer
         {
-            LastVisit = DateTime.UtcNow,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
             AccountId = accountId.ToLower(CultureInfo.InvariantCulture),
             NickName = playerInfo.NickName ?? accountId,
-            UbisoftName = playerInfo?.NickName ?? accountId,
-            Zone = playerInfo?.Path ?? "World"
+            UbisoftName = playerInfo.NickName ?? accountId,
+            Zone = playerInfo.Path ?? "World"
         };
 
         var id = await Database.InsertWithIdentityAsync(player);
@@ -39,5 +38,10 @@ public class PlayerRepository : DbRepository, IPlayerRepository
     public Task UpdateLastVisitAsync(IPlayer player) => Table<DbPlayer>()
         .Where(t => t.Id == player.Id)
         .Set(t => t.LastVisit, DateTime.UtcNow)
+        .UpdateAsync();
+
+    public Task UpdateNicknameAsync(IPlayer player, string newNickname) => Table<DbPlayer>()
+        .Where(t => t.Id == player.Id)
+        .Set(t => t.NickName, newNickname)
         .UpdateAsync();
 }
