@@ -12,6 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
       <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />

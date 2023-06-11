@@ -30,7 +30,6 @@ namespace EvoSC;
 
 public sealed class Application : IEvoSCApplication, IDisposable
 {
-    private readonly string[] _args;
     private Container _services;
     private readonly bool _isDebug;
     private ILogger<Application> _logger;
@@ -40,9 +39,8 @@ public sealed class Application : IEvoSCApplication, IDisposable
     public CancellationToken MainCancellationToken => _runningToken.Token;
     public Container Services => _services;
 
-    public Application(string[] args)
+    public Application()
     {
-        _args = args;
         _isDebug = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") == "Development";
 
         ConfigureServiceContainer();

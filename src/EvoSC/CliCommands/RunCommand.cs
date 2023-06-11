@@ -1,17 +1,23 @@
-﻿using EvoSC.CLI;
-using EvoSC.CLI.Attributes;
-using EvoSC.CLI.Interfaces;
+﻿using McMaster.Extensions.CommandLineUtils;
 
 namespace EvoSC.CliCommands;
 
-[CliCommand(Name = "run", Description = "Start the server controller.")]
-[CliOption(typeof(int), "Verbosity level of the output.", "--verbosity", "-v")]
-public class RunCommand : ICliCommand
+[Command(Name = "run", Description = "Runs the EvoSC application")]
+[HelpOption]
+public class RunCommand
 {
-    public async Task ExecuteAsync(CancellationToken cancelToken, CliCommandContext context)
+    private readonly IConsole _console;
+
+    public RunCommand(IConsole console)
     {
-        var app = new Application(context.Args);
-        await app.RunAsync();
-        app.Dispose();
+        _console = console;
+    }
+
+    private async Task OnExecute()
+    {
+        _console.WriteLine("Starting app");
+        
+        await application.RunAsync();
+        application.Dispose();
     }
 }

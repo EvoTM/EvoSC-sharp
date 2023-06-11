@@ -1,6 +1,6 @@
 ﻿namespace EvoSC.CLI.Attributes;
 
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class CliOptionAttribute : Attribute
 {
     public string[] Aliases { get; }
