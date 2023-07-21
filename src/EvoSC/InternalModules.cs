@@ -3,6 +3,7 @@ using EvoSC.Modules.Interfaces;
 using EvoSC.Modules.Official.CurrentMapModule;
 using EvoSC.Modules.Official.ExampleModule;
 using EvoSC.Modules.Official.FastestCp;
+using EvoSC.Modules.Official.MapListModule;
 using EvoSC.Modules.Official.Maps;
 using EvoSC.Modules.Official.MatchManagerModule;
 using EvoSC.Modules.Official.ModuleManagerModule;
@@ -25,7 +26,8 @@ public static class InternalModules
         typeof(SetNameModule),
         typeof(FastestCpModule),
         typeof(ModuleManagerModule),
-        typeof(CurrentMapModule)
+        typeof(CurrentMapModule),
+        typeof(MapListModule)
     };
 
     /// <summary>

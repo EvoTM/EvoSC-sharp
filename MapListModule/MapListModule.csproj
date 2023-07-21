@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>EvoSC.Modules.Official.MapListModule</RootNamespace>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AssemblyName>MapListModule</AssemblyName>
+        <Title>MyModule</Title>
+        <Description>This is my awesome module.</Description>
+        <Version>1.0.0</Version>
+        <Authors>Me</Authors>
+    </PropertyGroup>
+
+    <!-- Source generator for Module Info -->
+    <ItemGroup>
+        <ProjectReference Include="..\..\EvoSC.Modules.SourceGeneration\EvoSC.Modules.SourceGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\src\EvoSC.Modules\EvoSC.Modules.csproj" />
+    </ItemGroup>
+
+    <!-- Project references for dependencies -->
+
+    <!-- Embedded resources such as localization and Manialink templates. -->
+    <ItemGroup>
+        <EmbeddedResource Include="Templates\**\*" />
+        <EmbeddedResource Update="Localization.resx">
+        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Database\Migration\" />
+      <Folder Include="Database\Models\" />
+      <Folder Include="Database\Repository\" />
+      <Folder Include="Models\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="ManiaExchange.ApiClient" Version="1.0.2" />
+    </ItemGroup>
+
+</Project>

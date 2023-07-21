@@ -1,0 +1,6 @@
+﻿[info]
+name = "MapListModule"
+title = "Map List Module"
+summary = "A module to display all available maps, sort and filter them and let admins change settings about them"
+version = "1.0.0"
+author = "Evo"
