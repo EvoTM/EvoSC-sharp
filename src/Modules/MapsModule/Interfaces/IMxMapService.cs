@@ -1,4 +1,5 @@
 ﻿using EvoSC.Common.Interfaces.Models;
+using EvoSC.Common.Models.Maps;
 
 namespace EvoSC.Modules.Official.MapsModule.Interfaces;
 
@@ -11,5 +12,5 @@ public interface IMxMapService
     /// <param name="shortName">If the map is hidden, the short name have to be given for it to find the map.</param>
     /// <param name="actor">The player who started the map download.</param>
     /// <returns></returns>
-    Task<IMap?> FindAndDownloadMapAsync(int mxId, string? shortName, IPlayer actor);
+    Task<MapStream?> FindAndDownloadMapAsync(int mxId, string? shortName, IPlayer actor);
 }
