@@ -7,6 +7,7 @@ using EvoSC.Modules.Official.MapListModule;
 using EvoSC.Modules.Official.Maps;
 using EvoSC.Modules.Official.MatchManagerModule;
 using EvoSC.Modules.Official.ModuleManagerModule;
+using EvoSC.Modules.Official.MotdModule;
 using EvoSC.Modules.Official.Player;
 using EvoSC.Modules.Official.PlayerRecords;
 using EvoSC.Modules.Official.SetName;
@@ -27,7 +28,8 @@ public static class InternalModules
         typeof(FastestCpModule),
         typeof(ModuleManagerModule),
         typeof(CurrentMapModule),
-        typeof(MapListModule)
+        typeof(MapListModule),
+        typeof(MotdModule)
     };
 
     /// <summary>
