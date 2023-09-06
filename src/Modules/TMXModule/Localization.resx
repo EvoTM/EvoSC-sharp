@@ -25,8 +25,8 @@
   <data name="MapAddedSuccessfully" xml:space="preserve">
     <value>Added {0} by $&lt;{1}$&gt; to the server.</value>
   </data>
-  <data name="MapRemovedSuccessfully" xml:space="preserve">
-    <value>Removed {0} by $&lt;{1}$&gt; from the server.</value>
+  <data name="MapPackAddedSuccessfully" xml:space="preserve">
+    <value>Added {0} by $&lt;{1}$&gt; with {2} maps to the server.</value>
   </data>
   <data name="Audit.MapAdded" xml:space="preserve">
     <value>Map was added.</value>
@@ -42,8 +42,5 @@
   </data>
   <data name="DuplicateMap" xml:space="preserve">
     <value>A map with ID {0} already exist on the server.</value>
-  </data>
-  <data name="MapRemovedFailed" xml:space="preserve">
-    <value>Failed removing map with ID {0}</value>
   </data>
 </root>

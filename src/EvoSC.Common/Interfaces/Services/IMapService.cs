@@ -34,6 +34,8 @@ public interface IMapService
     /// <exception cref="DuplicateNameException">Thrown if the map already exists within the database.</exception>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task<IMap> AddMapAsync(MapStream mapStream);
+
+    public Task<IMap> AddMapAsync(MapStream mapStream, string folderName);
     
     /// <summary>
     /// Add several maps to the server. Useful for adding mappacks.
@@ -41,6 +43,8 @@ public interface IMapService
     /// <param name="mapStreams">A list of objects containing the mapfile and the map metadata.</param>
     /// <returns></returns>
     public Task<IEnumerable<IMap>> AddMapsAsync(List<MapStream> mapStreams);
+    
+    public Task<IEnumerable<IMap>> AddMapsAsync(List<MapStream> mapStreams, string folderName);
     
     /// <summary>
     /// Removes a map from the server.

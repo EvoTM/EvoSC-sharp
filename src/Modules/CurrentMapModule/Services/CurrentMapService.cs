@@ -58,14 +58,14 @@ public class CurrentMapService : ICurrentMapService
         var dbMap = await _mapRepository.GetMapByUidAsync(mapUId);
         var author = "";
         var worldRecord = await _worldRecordService.GetRecord();
-        if (dbMap.Author.NickName == dbMap.Author.AccountId)
+        if (dbMap?.Author?.NickName == dbMap?.Author?.AccountId)
         {
             var serverMap = await _client.Remote.GetCurrentMapInfoAsync();
             author = serverMap.AuthorNickname.Length > 0 ? serverMap.AuthorNickname : serverMap.Author;
         }
         else
         {
-            author = dbMap.Author?.NickName;
+            author = dbMap?.Author?.NickName;
         }
         await _manialinkManager.SendPersistentManialinkAsync("CurrentMapModule.CurrentMapWidget",
             new

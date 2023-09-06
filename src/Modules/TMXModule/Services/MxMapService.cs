@@ -1,33 +1,36 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text.RegularExpressions;
-using EvoSC.Common.Interfaces.Models;
-using EvoSC.Common.Interfaces.Services;
+using System.Threading.Tasks;
 using EvoSC.Common.Models.Maps;
 using EvoSC.Common.Services.Attributes;
 using EvoSC.Common.Services.Models;
-using EvoSC.Modules.Official.MapsModule.Interfaces;
+using EvoSC.Modules.Official.TmxModule.Interfaces;
+using EvoSC.Modules.Official.TmxModule.Models;
 using ManiaExchange.ApiClient;
 using ManiaExchange.ApiClient.Api.Models;
 using ManiaExchange.ApiClient.Models;
 using Microsoft.Extensions.Logging;
 
-namespace EvoSC.Modules.Official.MapsModule.Services;
+namespace EvoSC.Modules.Official.TmxModule.Services;
 
-[Service(LifeStyle = ServiceLifeStyle.Transient)]
+[Service]
 public class MxMapService : IMxMapService
 {
     private readonly ILogger<MxMapService> _logger;
-    private readonly MxTmApi _tmxApi = new MxTmApi("EvoSC#");
+    private readonly MxTmApi _tmxApi = new("EvoSC#");
 
-    private static readonly Regex TMXFileNamePattern = new Regex(@"(\([0-9]+\)).Map.Gbx", RegexOptions.Compiled);
+    private static readonly Regex TMXFileNamePattern = new Regex(@"\(([0-9]+)\).Map.Gbx", RegexOptions.Compiled);
 
-    public MxMapService(ILogger<MxMapService> logger, IMapService mapService)
+    public MxMapService(ILogger<MxMapService> logger)
     {
         _logger = logger;
     }
 
-    public async Task<MapStream?> FindAndDownloadMapAsync(int mxId, string? shortName, IPlayer actor)
+    public async Task<MapStream?> FindAndDownloadMapAsync(int mxId, string? shortName)
     {
         var mapInfoDto = await FindMap(mxId, shortName);
         var mapFile = await DownloadMap(mxId, shortName);
@@ -84,21 +87,23 @@ public class MxMapService : IMxMapService
         return mapInfoDto;
     }
 
-    public async Task<IEnumerable<MapStream>> FindAndDownloadMapPack(int mxId, string? shortName, IPlayer actor)
+    public async Task<MapPackStream?> FindAndDownloadMapPackAsync(int mxId, string? shortName)
     {
+        var mapPackInfo = await FindMapPack(mxId, shortName);
         var mapInfosDto = await FindMapPackMaps(mxId, shortName);
         var mapFiles = await DownloadMapPack(mxId, shortName);
 
-        if (mapInfosDto.Length == 0 || mapFiles == null)
+        if (mapPackInfo == null || mapInfosDto.Length == 0 || mapFiles == null)
         {
-            return Enumerable.Empty<MapStream>();
+            return null;
         }
 
         var files = mapFiles.Entries.ToDictionary(entry => TMXFileNamePattern.Match(entry.Name).Groups[1].Value,
             entry => entry);
 
-        return mapInfosDto.Select(info =>
-            new MapStream(GetMapMetadataFromInfo(info), files[info.TrackID.ToString()].Open()));
+        var maps = mapInfosDto.Select(info =>
+            new MapStream(GetMapMetadataFromInfo(info), files[info.TrackID.ToString()].Open())).ToList();
+        return new MapPackStream(mapPackInfo, maps);
     }
 
     public async Task<ZipArchive?> DownloadMapPack(int mxId, string? shortName)

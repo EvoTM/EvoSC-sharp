@@ -33,7 +33,6 @@
         <ProjectReference Include="..\Modules\NextMapModule\NextMapModule.csproj" />
         <ProjectReference Include="..\Modules\Scoreboard\Scoreboard.csproj" />
         <ProjectReference Include="..\Modules\GeardownModule\GeardownModule.csproj" />
-        <ProjectReference Include="..\Modules\MapsModule\MapsModule.csproj" />
         <ProjectReference Include="..\Modules\MatchManagerModule\MatchManagerModule.csproj" />
         <ProjectReference Include="..\Modules\MatchReadyModule\MatchReadyModule.csproj" />
         <ProjectReference Include="..\Modules\MatchTrackerModule\MatchTrackerModule.csproj" />
@@ -43,7 +42,6 @@
         <ProjectReference Include="..\Modules\MatchTrackerModule\MatchTrackerModule.csproj" />
         <ProjectReference Include="..\Modules\NextMapModule\NextMapModule.csproj" />
         <ProjectReference Include="..\Modules\Scoreboard\Scoreboard.csproj" />
-        <ProjectReference Include="..\Modules\MapsModule\MapsModule.csproj" />
         <ProjectReference Include="..\Modules\MatchManagerModule\MatchManagerModule.csproj" />
         <ProjectReference Include="..\Modules\ASayModule\ASayModule.csproj" />
         <ProjectReference Include="..\Modules\SpectatorTargetInfo\SpectatorTargetInfo.csproj" />
@@ -58,6 +56,7 @@
         <ProjectReference Include="..\Modules\OpenPlanetModule\OpenPlanetModule.csproj" />
         <ProjectReference Include="..\Modules\ModuleManagerModule\ModuleManagerModule.csproj" />
         <ProjectReference Include="..\Modules\XPEvoAdminControl\XPEvoAdminControl.csproj" />
+        <ProjectReference Include="..\Modules\TmxModule\TmxModule.csproj" />
     </ItemGroup>
 
     <ItemGroup>

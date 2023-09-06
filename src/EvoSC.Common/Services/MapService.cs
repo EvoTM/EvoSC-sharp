@@ -1,4 +1,5 @@
-﻿using EvoSC.Common.Config.Models;
+﻿using CaseExtensions;
+using EvoSC.Common.Config.Models;
 using EvoSC.Common.Exceptions;
 using EvoSC.Common.Interfaces;
 using EvoSC.Common.Interfaces.Database.Repository;
@@ -35,7 +36,13 @@ public class MapService : IMapService
     public async Task<IMap?> GetMapByUidAsync(string uid) => await _mapRepository.GetMapByUidAsync(uid);
     public async Task<IMap?> GetMapByExternalIdAsync(string id) => await _mapRepository.GetMapByExternalIdAsync(id);
 
-    public async Task<IMap> AddMapAsync(MapStream mapStream)
+    public Task<IMap> AddMapAsync(MapStream mapStream)
+    {
+        return AddMapAsync(mapStream, ".");
+    }
+    
+
+    public async Task<IMap> AddMapAsync(MapStream mapStream, string folderName)
     {
         var mapMetadata = mapStream.MapMetadata;
         var mapFile = mapStream.MapFile;
@@ -48,8 +55,8 @@ public class MapService : IMapService
         }
 
         var fileName = $"{mapMetadata.MapUid}.Map.Gbx";
-        var filePath = Path.Combine(_config.Path.Maps, "EvoSC", fileName);
-        var relativePath = Path.Combine("EvoSC", fileName);
+        var filePath = Path.Combine(_config.Path.Maps, "EvoSC", folderName, fileName);
+        var relativePath = Path.Combine("EvoSC", folderName, fileName);
 
         await SaveMapFileAsync(mapFile, filePath);
 
@@ -73,20 +80,25 @@ public class MapService : IMapService
         }
 
         await _matchSettings.EditMatchSettingsAsync(Path.GetFileNameWithoutExtension(_config.Path.DefaultMatchSettings),
-            builder => builder.AddMap($"EvoSC/{fileName}"));
+            builder => builder.AddMap(relativePath));
         
-        /*await _serverClient.Remote.InsertMapAsync($"EvoSC/{fileName}");
-        await _serverClient.Remote.SaveMatchSettingsAsync($"MatchSettings/{_config.Path.DefaultMatchSettings}"); */
+        await _serverClient.Remote.InsertMapAsync(relativePath);
+        await _serverClient.Remote.SaveMatchSettingsAsync($"MatchSettings/{_config.Path.DefaultMatchSettings}");
         
         return map;
     }
 
-    public async Task<IEnumerable<IMap>> AddMapsAsync(List<MapStream> mapStreams)
+    public Task<IEnumerable<IMap>> AddMapsAsync(List<MapStream> mapStreams)
+    {
+        return AddMapsAsync(mapStreams, ".");
+    }
+
+    public async Task<IEnumerable<IMap>> AddMapsAsync(List<MapStream> mapStreams, string folderName)
     {
         var maps = new List<IMap>();
         foreach (var mapStream in mapStreams)
         {
-            var map = await AddMapAsync(mapStream);
+            var map = await AddMapAsync(mapStream, folderName);
             maps.Add(map);
         }
 

@@ -7,7 +7,6 @@ using EvoSC.Modules.Official.ASayModule;
 using EvoSC.Modules.Official.ExampleModule;
 using EvoSC.Modules.Official.FastestCp;
 using EvoSC.Modules.Official.LiveRankingModule;
-using EvoSC.Modules.Official.MapsModule;
 using EvoSC.Modules.Official.MatchManagerModule;
 using EvoSC.Modules.Official.MatchRankingModule;
 using EvoSC.Modules.Official.MatchReadyModule;
@@ -21,6 +20,7 @@ using EvoSC.Modules.Official.SetName;
 using EvoSC.Modules.Official.SponsorsModule;
 using EvoSC.Modules.Official.WorldRecordModule;
 using EvoSC.Modules.Official.XPEvoAdminControl;
+using EvoSC.Modules.Official.TmxModule;
 using FluentMigrator.Runner.Exceptions;
 using SpectatorTargetInfo;
 
@@ -32,7 +32,6 @@ public static class InternalModules
     {
         typeof(PlayerModule),
         typeof(ExampleModule),
-        typeof(MapsModule),
         typeof(WorldRecordModule),
         typeof(PlayerRecordsModule),
         typeof(MatchManagerModule),
@@ -51,7 +50,7 @@ public static class InternalModules
         typeof(MatchRankingModule),
         typeof(ASayModule),
         typeof(SpectatorTargetInfoModule),
-        typeof(SponsorsModule)
+        typeof(SponsorsModule),        typeof(TmxModule)
     };
 
     /// <summary>
