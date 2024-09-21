@@ -122,6 +122,24 @@ public class MatchSettingsService(ILogger<MatchSettingsService> logger, IServerC
         return scriptName.ToEnumValue<DefaultModeScriptName>() ?? DefaultModeScriptName.Unknown;
     }
 
+    public async Task<IEnumerable<string>> GetAvailableMatchSettings()
+    {
+        var mapsDir = await server.GetMapsDirectoryAsync();
+        var msDir = Path.Combine(mapsDir, "MatchSettings");
+
+        if (!Directory.Exists(msDir))
+        {
+            return Array.Empty<string>();
+        }
+
+        return Directory
+            .GetFiles(msDir, "*.txt")
+            .Select(file =>
+                Path.GetFileNameWithoutExtension(file) ?? throw new InvalidOperationException("Not a real file.")
+            )
+            .OrderBy(s => s);
+    }
+
     private async Task<string> GetFilePathAsync(string name)
     {
         var mapsDir = await server.GetMapsDirectoryAsync();

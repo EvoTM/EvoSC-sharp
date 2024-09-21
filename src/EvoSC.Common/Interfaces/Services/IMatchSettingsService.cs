@@ -103,4 +103,10 @@ public interface IMatchSettingsService
     /// </summary>
     /// <returns></returns>
     public Task<DefaultModeScriptName> GetCurrentModeAsync();
+
+    /// <summary>
+    /// Return a list of names of available match settings configurations on the server.
+    /// </summary>
+    /// <returns></returns>
+    public Task<IEnumerable<string>> GetAvailableMatchSettings();
 }

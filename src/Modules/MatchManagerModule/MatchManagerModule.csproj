@@ -24,4 +24,12 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="Templates\**\*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Templates\Pages\" />
+    </ItemGroup>
+
 </Project>

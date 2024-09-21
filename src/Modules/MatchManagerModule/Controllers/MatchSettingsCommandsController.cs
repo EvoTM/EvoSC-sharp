@@ -9,7 +9,7 @@ using EvoSC.Modules.Official.MatchManagerModule.Permissions;
 namespace EvoSC.Modules.Official.MatchManagerModule.Controllers;
 
 [Controller]
-public class MatchSettingsCommandsController(IMatchManagerHandlerService matchHandler) : EvoScController<ICommandInteractionContext>
+public class MatchSettingsCommandsController(IMatchManagerHandlerService matchHandler, IMatchSettingsManagerService matchSettingsManager) : EvoScController<ICommandInteractionContext>
 {
     [ChatCommand("setmode", "[Command.SetMode]", MatchManagerPermissions.SetLiveMode)]
     [CommandAlias("/mode", hide: true)]
@@ -29,4 +29,9 @@ public class MatchSettingsCommandsController(IMatchManagerHandlerService matchHa
     [CommandAlias("/ssetting", hide: true)]
     [CommandAlias("/ss", hide: true)]
     public Task SetScriptSettingAsync(string name, string value) => matchHandler.SetScriptSettingAsync(name, value, Context.Player);
+
+    [ChatCommand("matchsettingsmanager", "[Command.MatchSettingsManager]")]
+    [CommandAlias("/msm", hide: true)]
+    public Task ShowMatchSettingsManager() => matchSettingsManager.ShowManagerUiAsync(Context.Player);
 }
+
