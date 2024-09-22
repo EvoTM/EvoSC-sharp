@@ -3,14 +3,18 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 as build
 
 WORKDIR /source
 COPY . .
+COPY ./NuGet.Config /nuget.config
 
 RUN dotnet publish "src/EvoSC/EvoSC.csproj" -r linux-musl-x64 --self-contained true -c Release -o /publish
 
+COPY ./main.toml config/main.toml
+
 # Set user & permissions
-FROM alpine:latest as run-chown
+FROM alpine:latest AS run-chown
 
 WORKDIR /app
 COPY --from=build /publish .
+COPY externalmodules modules
 RUN true \
     && chown 9999:9999 -R /app \
     && true
