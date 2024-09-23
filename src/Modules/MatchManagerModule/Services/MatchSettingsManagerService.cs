@@ -15,4 +15,14 @@ public class MatchSettingsManagerService(IMatchSettingsService matchSettingsServ
         await manialinks.SendManialinkAsync(player, "MatchManagerModule.MatchSettingsManager",
             new { availableMatchSettings = matchSettings });
     }
+
+    public async Task ShowEditMatchSettingsUiAsync(IPlayer player, string name)
+    {
+        var matchSettings = await matchSettingsService.GetMatchSettingsAsync(name);
+
+        var trans = manialinks.CreateTransaction();
+        await trans.SendManialinkAsync(player, "MatchManagerModule.EditMatchSettings", new { matchSettings });
+        await trans.HideManialinkAsync(player, "MatchManagerModule.MatchSettingsManager");
+        await trans.CommitAsync();
+    }
 }

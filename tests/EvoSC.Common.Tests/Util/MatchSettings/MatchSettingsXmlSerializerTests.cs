@@ -11,7 +11,7 @@ public class MatchSettingsXmlSerializerTests
     public void Generate_Default_MatchSettings_With_Mode()
     {
         var expected = File.ReadAllText("TestFiles/Util/MatchSettings/expected_default_matchsettings_with_mode.xml");
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("MyMode")
             .Build();
 
@@ -24,7 +24,7 @@ public class MatchSettingsXmlSerializerTests
     public void Generate_MatchSettings_With_ScriptSettings()
     {
         var expected = File.ReadAllText("TestFiles/Util/MatchSettings/expected_matchsettings_with_script_settings.xml");
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("MyMode")
             .WithModeSettings(s => s["S_MySetting"] = 1337)
             .Build();
@@ -38,7 +38,7 @@ public class MatchSettingsXmlSerializerTests
     public void Generate_MatchSettings_With_Maps()
     {
         var expected = File.ReadAllText("TestFiles/Util/MatchSettings/expected_matchsettings_with_maps.xml");
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("MyMode")
             .AddMap("MyMap.Map.Gbx", "my-ident")
             .Build();

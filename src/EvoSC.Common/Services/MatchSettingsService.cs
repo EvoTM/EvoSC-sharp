@@ -74,7 +74,7 @@ public class MatchSettingsService(ILogger<MatchSettingsService> logger, IServerC
 
     public Task<IMatchSettings> CreateMatchSettingsAsync(string name, Action<MatchSettingsBuilder> matchSettings)
     {
-        var builder = new MatchSettingsBuilder();
+        var builder = new MatchSettingsBuilder(name);
         matchSettings(builder);
 
         return SaveMatchSettingsAsync(name, builder);
@@ -85,7 +85,10 @@ public class MatchSettingsService(ILogger<MatchSettingsService> logger, IServerC
         var filePath = await GetFilePathAsync(name);
         
         var contents = await File.ReadAllTextAsync(filePath);
-        return await MatchSettingsXmlParser.ParseAsync(contents);
+        var ms = await MatchSettingsXmlParser.ParseAsync(contents);
+        ms.Name = name;
+
+        return ms;
     }
 
     public async Task<IEnumerable<IMap>> GetCurrentMapListAsync()

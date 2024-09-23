@@ -23,7 +23,7 @@ public class MatchSettingsBuilderTests
     [InlineData(DefaultModeScriptName.TmwtTeams, "Trackmania/TM_TMWTTeams_Online.Script.txt")]
     public void Set_Default_Mode_Script_Name(DefaultModeScriptName name, string expected)
     {
-        var builder = new MatchSettingsBuilder();
+        var builder = new MatchSettingsBuilder("MyMatchSettings");
         builder.WithMode(name);
 
         var ms = builder.Build();
@@ -34,7 +34,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Set_Custom_Mode_Script_Name()
     {
-        var builder = new MatchSettingsBuilder();
+        var builder = new MatchSettingsBuilder("MyMatchSettings");
 
         builder.WithMode("My_Custom_Mode");
 
@@ -46,7 +46,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void GameInfos_Values_Set_Correctly_With_Internal_Builder()
     {
-        var msb = new MatchSettingsBuilder().WithGameInfos(gi => gi
+        var msb = new MatchSettingsBuilder("MyMatchSettings").WithGameInfos(gi => gi
             .WithScriptName("My_Script_Name")
             .WithChatTime(123)
             .WithGameMode(5234)
@@ -79,7 +79,7 @@ public class MatchSettingsBuilderTests
             .ForceShowAllOpponents(true)
             .DisableRespawn(true)
             .WithFinishTimeout(5143);
-        var msb = new MatchSettingsBuilder();
+        var msb = new MatchSettingsBuilder("MyMatchSettings");
 
         var ms = msb.WithGameInfos(gib).Build();
         
@@ -96,7 +96,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Set_Filter_With_Internal_Builder()
     {
-        var msb = new MatchSettingsBuilder()
+        var msb = new MatchSettingsBuilder("MyMatchSettings")
             .WithFilter(f => f
                 .AsHotseat(true)
                 .AsInternet(false)
@@ -128,7 +128,7 @@ public class MatchSettingsBuilderTests
             .AsRandomMapOrder(true)
             .WithSortIndex(1243);
 
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithFilter(filter)
             .WithMode("Test")
             .Build();
@@ -149,7 +149,7 @@ public class MatchSettingsBuilderTests
     [InlineData(-1, 0)]
     public void Set_Start_Index(int index, int expected)
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .WithStartIndex(index)
             .Build();
@@ -160,7 +160,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Map_Added_By_Map_Object()
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .AddMap(new Map{ FilePath = "MyMap.Map.Gbx", Uid = "my-uid"})
             .Build();
@@ -177,7 +177,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Add_Map_By_File_Name_Only()
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .AddMap("MyMap.Map.Gbx")
             .Build();
@@ -193,7 +193,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Add_Map_By_File_Name_And_Uid_String()
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .AddMap("MyMap.Map.Gbx", "my-uid")
             .Build();
@@ -217,7 +217,7 @@ public class MatchSettingsBuilderTests
             new Map {FilePath = "three.Map.Gbx", Uid = "uid3"},
         };
 
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .AddMaps(maps)
             .Build();
@@ -250,7 +250,7 @@ public class MatchSettingsBuilderTests
             new Map {FilePath = "three.Map.Gbx", Uid = "uid3"},
         };
 
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .AddMap("to-be-replaced1")
             .AddMap("to-be-replaced2")
@@ -279,7 +279,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Script_Settings_From_CLR_Object()
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode(DefaultModeScriptName.TimeAttack)
             .WithModeSettings<TimeAttackModeScriptSettings>(ta => ta.TimeLimit = 1337)
             .Build();
@@ -294,7 +294,7 @@ public class MatchSettingsBuilderTests
 
         Assert.Throws<InvalidOperationException>(() =>
         {
-            new MatchSettingsBuilder()
+            new MatchSettingsBuilder("MyMatchSettings")
                 .WithMode(DefaultModeScriptName.Cup)
                 .WithModeSettings<TimeAttackModeScriptSettings>(ta => ta.TimeLimit = 1337)
                 .Build();
@@ -304,7 +304,7 @@ public class MatchSettingsBuilderTests
     [Fact]
     public void Set_Custom_Script_Settings()
     {
-        var ms = new MatchSettingsBuilder()
+        var ms = new MatchSettingsBuilder("MyMatchSettings")
             .WithMode("Test")
             .WithModeSettings(d => d["S_MySetting"] = 1234)
             .Build();
@@ -358,7 +358,7 @@ public class MatchSettingsBuilderTests
     {
         Assert.Throws<InvalidOperationException>(() =>
         {
-            new MatchSettingsBuilder().Build();
+            new MatchSettingsBuilder("MyMatchSettings").Build();
         });
     }
 }

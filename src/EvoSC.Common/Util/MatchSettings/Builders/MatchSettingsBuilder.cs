@@ -18,9 +18,11 @@ public class MatchSettingsBuilder
     private Dictionary<string, ModeScriptSettingInfo> _scriptSettings;
     private List<IMap> _maps = new();
     private int _startIndex;
+    private string _name;
 
-    public MatchSettingsBuilder()
+    public MatchSettingsBuilder(string name)
     {
+        _name = name;
     }
     
     /// <summary>
@@ -236,7 +238,8 @@ public class MatchSettingsBuilder
             Filter = _filterBuilder.Build(),
             ModeScriptSettings = _scriptSettings,
             Maps = _maps,
-            StartIndex = _startIndex
+            StartIndex = _startIndex,
+            Name = _name
         };
     }
 

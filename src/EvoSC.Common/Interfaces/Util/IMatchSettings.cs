@@ -29,4 +29,9 @@ public interface IMatchSettings
     /// The index to start in the map list.
     /// </summary>
     public int StartIndex { get; set; }
+    
+    /// <summary>
+    /// The name of the match settings.
+    /// </summary>
+    public string Name { get; set; }
 }

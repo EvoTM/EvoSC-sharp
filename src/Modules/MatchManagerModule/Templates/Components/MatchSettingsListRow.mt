@@ -35,11 +35,19 @@
               y="{{ -(height-5)/2 }}"
               action="MatchSettingsManialinkController/duplicate/{{ name }}"
       />
+
+      <IconButton
+              icon="{{ Icons.Gears }}"
+              id='{{ "btnEdit" + index }}'
+              x="{{ width-23-2 }}"
+              y="{{ -(height-5)/2 }}"
+              action="MatchSettingsManialinkController/edit/{{ name }}"
+      />
       
       <IconButton 
               icon="{{ Icons.Play }}" 
               id='{{ "btnLoad" + index }}' 
-              x="{{ width-23-2 }}" 
+              x="{{ width-29-2 }}" 
               y="{{ -(height-5)/2 }}"
               action="MatchSettingsManialinkController/load/{{ name }}"
       />
