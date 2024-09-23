@@ -18,6 +18,4 @@
       <TextInput id="txtValue-{{ index }}" y="{{ -(height - 5)/2 }}" x="{{ width-25-1 }}" />
     </frame>
   </template>
-
-  <script resource="EvoSC.Scripts.UIScripts" main="true" />
 </component>
