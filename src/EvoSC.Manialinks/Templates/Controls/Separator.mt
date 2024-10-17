@@ -18,18 +18,21 @@ of the user interface.
   <!-- The direction of the separator, can be: horizontal or vertical -->
   <property type="string" name="direction" default="horizontal" /> <!-- horizontal or vertical -->
   
+  <!-- Color of the separator line -->
+  <property type="string?" name="color" default="" />
+  
   <template>
     <quad 
             pos="{{ x }} {{ y }}" 
             size="{{ length }} {{ thickness }}" 
-            bgcolor="{{ Theme.UI_Separator_Default_Bg }}"
+            bgcolor="{{ string.IsNullOrEmpty(color) ? Theme.UI_Separator_Default_Bg : color }}"
             if='direction == "horizontal"'
     />
 
     <quad
             pos="{{ x }} {{ y }}"
             size="{{ thickness }} {{ length }}"
-            bgcolor="{{ Theme.UI_Separator_Default_Bg }}"
+            bgcolor="{{ string.IsNullOrEmpty(color) ? Theme.UI_Separator_Default_Bg : color }}"
             if='direction == "vertical"'
     />
   </template>

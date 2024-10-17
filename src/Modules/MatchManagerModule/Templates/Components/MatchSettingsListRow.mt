@@ -43,11 +43,19 @@
               y="{{ -(height-5)/2 }}"
               action="MatchSettingsManialinkController/edit/{{ name }}"
       />
+
+      <IconButton
+              icon="{{ Icons.ListUl }}"
+              id='{{ "btnMaps" + index }}'
+              x="{{ width-29-2 }}"
+              y="{{ -(height-5)/2 }}"
+              action="MatchSettingsManialinkController/editMaps/{{ name }}"
+      />
       
       <IconButton 
               icon="{{ Icons.Play }}" 
               id='{{ "btnLoad" + index }}' 
-              x="{{ width-29-2 }}" 
+              x="{{ width-35-2 }}" 
               y="{{ -(height-5)/2 }}"
               action="MatchSettingsManialinkController/load/{{ name }}"
       />
