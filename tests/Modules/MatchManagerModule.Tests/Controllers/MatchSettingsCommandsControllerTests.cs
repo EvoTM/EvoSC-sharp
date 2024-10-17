@@ -10,10 +10,11 @@ public class MatchSettingsCommandsControllerTests : CommandInteractionController
 {
     private Mock<IOnlinePlayer> _player = new();
     private Mock<IMatchManagerHandlerService> _matchHandler = new();
+    private Mock<IMatchSettingsManagerService> _matchSettings = new();
 
     public MatchSettingsCommandsControllerTests()
     {
-        InitMock(_player.Object, _matchHandler);
+        InitMock(_player.Object, _matchHandler, _matchSettings);
     }
 
     [Fact]
