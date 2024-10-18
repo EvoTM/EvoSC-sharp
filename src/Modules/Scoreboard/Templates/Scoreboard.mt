@@ -609,7 +609,7 @@
         *** OnScriptExecutionFinished *** 
         ***
             sleep(5000);
-            TriggerPageAction("ScoreboardManialinkController/ResendScoreboard");
+            TriggerPageAction("ScoreboardManialink/ResendScoreboard");
         ***
         -->
     </script>

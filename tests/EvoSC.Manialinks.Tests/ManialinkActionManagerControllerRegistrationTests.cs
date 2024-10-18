@@ -94,7 +94,7 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(SimpleManialinkWithoutPostfixes));
 
-        var (action, route) = actionManager.FindAction("SimpleManialink/TestAction");
+        var (action, route) = actionManager.FindAction("SimpleManialinkWithoutPostfixes/TestAction");
         
         Assert.NotNull(action);
         Assert.NotNull(route);
@@ -171,11 +171,10 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(ActionWithParamsController));
 
-        var (action, route) = actionManager.FindAction("ManialinkWithParams/TestAction/1/2");
+        var (action, route) = actionManager.FindAction("ActionWithParams/TestAction/1/2");
         
         Assert.NotNull(action);
         Assert.NotNull(route);
-        
         
         Assert.NotNull(route.Children?.Values.FirstOrDefault()?.Children?.Values.FirstOrDefault()?.Children?.Values.FirstOrDefault());
         
@@ -192,7 +191,7 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(ActionWithPermissionsController));
 
-        var (action, route) = actionManager.FindAction("ManialinkWithParams/TestAction");
+        var (action, route) = actionManager.FindAction("ActionWithPermissions/TestAction");
         
         Assert.NotNull(action);
         Assert.NotNull(route);
@@ -206,7 +205,7 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(ActionWithEnumIdentPermissionsController));
 
-        var (action, route) = actionManager.FindAction("ManialinkWithParams/TestAction");
+        var (action, route) = actionManager.FindAction("ActionWithEnumIdentPermissions/TestAction");
         
         Assert.NotNull(action);
         Assert.NotNull(route);
@@ -220,7 +219,7 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(ActionWithPermissionsFromClassController));
 
-        var (action, route) = actionManager.FindAction("ManialinkWithParams/TestAction");
+        var (action, route) = actionManager.FindAction("ActionWithPermissionsFromClass/TestAction");
         
         Assert.NotNull(action);
         Assert.NotNull(route);
@@ -234,7 +233,7 @@ public class ManialinkActionManagerControllerRegistrationTests
         
         actionManager.RegisterForController(typeof(ActionWithOverridingPermissionsController));
 
-        var (action, route) = actionManager.FindAction("ManialinkWithParams/TestAction");
+        var (action, route) = actionManager.FindAction("ActionWithOverridingPermissions/TestAction");
         
         Assert.NotNull(action);
         Assert.NotNull(route);

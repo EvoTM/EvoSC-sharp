@@ -11,7 +11,7 @@ Shows a confirmation dialog when deleting a map from the leaderboard.
     <ConfirmDialog 
             title="Reset local records?"
             text="This will re-calculate local records on all maps based PBs."
-            action="LocalRecordsManialinkController/ConfirmReset"
+            action="LocalRecordsManialink/ConfirmReset"
     />
   </template>
   

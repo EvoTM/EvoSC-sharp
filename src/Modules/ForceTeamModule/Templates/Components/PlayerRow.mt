@@ -20,7 +20,7 @@
                   icon="{{ Icons.ArrowRight }}" 
                   style="round" x="{{ width-5 }}"
                   size="small"
-                  action="ForceTeamManialinkController/SwitchPlayer/{{ player.AccountId }}" />
+                  action="ForceTeamManialink/SwitchPlayer/{{ player.AccountId }}" />
       
       <label if="player.IsTeam2()"
              class="text-primary" 
@@ -33,7 +33,7 @@
                   icon="{{ Icons.ArrowLeft }}" 
                   style="round"
                   size="small"
-                  action="ForceTeamManialinkController/SwitchPlayer/{{ player.AccountId }}" />
+                  action="ForceTeamManialink/SwitchPlayer/{{ player.AccountId }}" />
     </frame>
   </template>
 </component>

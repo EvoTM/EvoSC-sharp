@@ -34,7 +34,7 @@ Show a row with map information along with action buttons.
               x="{{ width-6 }}"
               id="btnRemove{{ index }}"
               type="secondary"
-              action="MapListManialinkController/DeleteMap/{{ map.Map.Uid }}"
+              action="MapListManialink/DeleteMap/{{ map.Map.Uid }}"
               if="canRemoveMaps"
       />
       
@@ -43,13 +43,13 @@ Show a row with map information along with action buttons.
               y="{{ -(height-5)/2 }}" 
               x="{{ width-12 + (canRemoveMaps ? 0 : 6) }}" 
               id="btnQueue{{ index }}"
-              action="MapListManialinkController/QueueMap/{{ map.Map.Uid }}" />
+              action="MapListManialink/QueueMap/{{ map.Map.Uid }}" />
       
       <IconButton icon="{{ Icons.HeartO }}"
                   y="{{ -(height-5)/2 }}" 
                   x="{{ width-18 + (canRemoveMaps ? 0 : 6) }}" 
                   id="btnFavorite{{ index }}"
-                  action="MapListManialinkController/FavoriteMap/{{ map.Map.Uid }}" />
+                  action="MapListManialink/FavoriteMap/{{ map.Map.Uid }}" />
     </Panel>
   </template>
 </component>

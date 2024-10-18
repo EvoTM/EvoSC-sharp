@@ -382,11 +382,22 @@ public class ManialinkActionManager(ILogger<ManialinkActionManager> logger) : IM
     public (IManialinkAction, IMlRouteNode) FindAction(string action)
     {
         var routeComponents = action.Split(RouteDelimiter);
+        var firstNodeName = routeComponents.FirstOrDefault();
+
+        if (firstNodeName == null)
+        {
+            throw new InvalidOperationException("Tried to find an empty manialink route.");
+        }
 
         lock (_rootNodeMutex)
         {
             foreach (var rootComponent in _rootNode.Children.Values)
             {
+                if (!rootComponent.Name.Equals(firstNodeName, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+                
                 var (manialinkAction, path) = FindActionInternal(routeComponents, rootComponent);
 
                 if (manialinkAction == null || path == null)

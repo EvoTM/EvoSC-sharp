@@ -23,9 +23,9 @@
         <Container 
                 id="settingsList" 
                 scrollable="true" 
-                scrollHeight="100"
+                scrollHeight="{{ 61 + matchSettings.ModeScriptSettings.Count()*6 }}" 
                 width="{{ winWidth-5 }}" 
-                height="{{ winHeight-20 }}"
+                height="{{ winHeight-20 }}" 
         >
           <frame>
             <label text="Game Information" class="text-xl" />
@@ -67,7 +67,7 @@
                     name="{{ name }}"
                     title="{{ name }}"
                     value='{{ (option.Value ?? "").ToString() }}'
-                    y="{{ -__index*6 }}"
+                    y="{{ -__index*6-6 }}"
                     width="{{ winWidth-6 }}"
             />
           </frame>
@@ -75,7 +75,7 @@
       </frame>
       
       <Button y="-(winHeight-19)" x="{{ winWidth-5-36 }}" id="btnCancel" text="Cancel" />
-      <Button y="-(winHeight-19)" x="{{ winWidth-5-18 }}" id="btnSave" text="Save" />
+      <Button y="-(winHeight-19)" x="{{ winWidth-5-18 }}" id="btnSave" text="Save" action="EditMatchSettingsManialink/edit/{{ matchSettings.Name }}" />
     </Window>
   </template>
 

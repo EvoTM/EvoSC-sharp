@@ -124,7 +124,7 @@
         <Circle radius="2" bgColor="{{ Theme.Ice }}" y="-75" /><label pos="5 -75.5" class="text-primary" text="ICE" />
       </frame>
       
-      <Button id="btnShowDialog" text="Dialog" action="ExampleManialinkController/ShowDialog" x="90" y="-44" />
+      <Button id="btnShowDialog" text="Dialog" action="ExampleManialink/ShowDialog" x="90" y="-44" />
     </Window>
     <Alert text="Hello there!" id="myAlert" y="70" type="primary" />
   </template>

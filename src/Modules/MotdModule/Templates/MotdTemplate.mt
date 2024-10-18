@@ -38,7 +38,7 @@
             
                     declare Checkbox <=> Page.MainFrame.GetFirstChild("chkDontShowAgain") as CMlFrame;
                     declare IsChecked for Checkbox = False;
-                    TriggerPageAction("MotdManialinkController/Close/" ^ IsChecked);
+                    TriggerPageAction("MotdManialink/Close/" ^ IsChecked);
                 }
             ***
         -->

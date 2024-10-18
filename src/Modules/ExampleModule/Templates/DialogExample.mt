@@ -4,7 +4,7 @@
   
   <template>
     <UIStyle />
-    <ConfirmDialog action="ExampleManialinkController/DialogAction" 
+    <ConfirmDialog action="ExampleManialink/DialogAction" 
                    title="you are about to delete a map" 
                    text="Are you sure you want to delete this map? This action cannot be undone."
                    severity="warning"

@@ -2,7 +2,7 @@
     <template/>
     <script><!--
     Text ReportSpecTarget(Text targetLogin){
-        TriggerPageAction("SpectatorTargetInfoManialinkController/ReportSpectatorTarget/" ^ targetLogin);
+        TriggerPageAction("SpectatorTargetInfoManialink/ReportSpectatorTarget/" ^ targetLogin);
         return targetLogin;
     }
     

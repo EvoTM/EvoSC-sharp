@@ -14,7 +14,7 @@ Shows a confirmation dialog when deleting a map from the leaderboard.
     <ConfirmDialog 
             title="You are about to delete a map"
             text="Delete the map '{{ mapName }}'?"
-            action="MapListManialinkController/ConfirmDelete/{{ mapUid }}"
+            action="MapListManialink/ConfirmDelete/{{ mapUid }}"
     />
   </template>
   

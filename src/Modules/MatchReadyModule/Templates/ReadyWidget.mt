@@ -245,7 +245,7 @@
         if ({{ showButton }} && IsMouseOver(readyBtnBg)) {
             // pre-update widget for better UI experience
             // UpdateWidget(!isReady, True);
-            TriggerPageAction("ReadyManialinkController/ReadyButton/" ^ (!isReady));
+            TriggerPageAction("ReadyManialink/ReadyButton/" ^ (!isReady));
         }
     ***
     

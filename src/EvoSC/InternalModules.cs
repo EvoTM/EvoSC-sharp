@@ -49,7 +49,7 @@ public static class InternalModules
         typeof(FastestCpModule),
         typeof(CurrentMapModule),
         typeof(MotdModule),
-        typeof(OpenPlanetModule),
+        //typeof(OpenPlanetModule),
         typeof(MatchTrackerModule),
         typeof(MatchReadyModule),
         typeof(NextMapModule),

@@ -17,7 +17,7 @@
               id='{{ "btnDelete" + index }}' 
               x="{{ width-5-2 }}" 
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/confirmDelete/{{ name }}"
+              action="MatchSettingsManialink/confirmDelete/{{ name }}"
       />
       
       <IconButton 
@@ -25,7 +25,7 @@
               id='{{ "btnRename" + index }}' 
               x="{{ width-11-2 }}" 
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/rename/{{ name }}"
+              action="MatchSettingsManialink/rename/{{ name }}"
       />
       
       <IconButton 
@@ -33,7 +33,7 @@
               id='{{ "btnDuplicate" + index }}' 
               x="{{ width-17-2 }}" 
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/duplicate/{{ name }}"
+              action="MatchSettingsManialink/duplicate/{{ name }}"
       />
 
       <IconButton
@@ -41,7 +41,7 @@
               id='{{ "btnEdit" + index }}'
               x="{{ width-23-2 }}"
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/edit/{{ name }}"
+              action="MatchSettingsManialink/edit/{{ name }}"
       />
 
       <IconButton
@@ -49,7 +49,7 @@
               id='{{ "btnMaps" + index }}'
               x="{{ width-29-2 }}"
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/editMaps/{{ name }}"
+              action="MatchSettingsManialink/editMaps/{{ name }}"
       />
       
       <IconButton 
@@ -57,9 +57,8 @@
               id='{{ "btnLoad" + index }}' 
               x="{{ width-35-2 }}" 
               y="{{ -(height-5)/2 }}"
-              action="MatchSettingsManialinkController/load/{{ name }}"
+              action="MatchSettingsManialink/load/{{ name }}"
       />
     </Panel>
   </template>
-
 </component>
